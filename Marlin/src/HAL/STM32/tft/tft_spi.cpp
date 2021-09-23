@@ -34,6 +34,31 @@
 SPI_HandleTypeDef TFT_SPI::SPIx;
 DMA_HandleTypeDef TFT_SPI::DMAtx;
 
+void HAL_SPI_MspDeInit(SPI_HandleTypeDef *hspi)
+{
+  #ifdef SPI1_BASE
+    if (hspi->Instance == SPI1) {
+      __HAL_RCC_SPI1_FORCE_RESET();
+      __HAL_RCC_SPI1_RELEASE_RESET();
+      __HAL_RCC_SPI1_CLK_ENABLE();
+    }
+  #endif
+  #ifdef SPI2_BASE
+    if (hspi->Instance == SPI2) {
+      __HAL_RCC_SPI2_FORCE_RESET();
+      __HAL_RCC_SPI2_RELEASE_RESET();
+      __HAL_RCC_SPI2_CLK_ENABLE();
+    }
+  #endif
+  #ifdef SPI3_BASE
+    if (hspi->Instance== SPI3) {
+      __HAL_RCC_SPI3_FORCE_RESET();
+      __HAL_RCC_SPI3_RELEASE_RESET();
+      __HAL_RCC_SPI3_CLK_ENABLE();
+    }
+  #endif
+}
+
 void TFT_SPI::Init() {
   SPI_TypeDef *spiInstance;
 
@@ -222,8 +247,8 @@ void TFT_SPI::Transmit(uint16_t Data) {
 }
 
 void TFT_SPI::TransmitDMA(uint32_t MemoryIncrease, uint16_t *Data, uint16_t Count) {
-  // Wait last dma finish, to start another
-  while (isBusy()) { /* nada */ }
+  // // Wait last dma finish, to start another
+  // while (isBusy()) { /* nada */ }
 
   DMAtx.Init.MemInc = MemoryIncrease;
   HAL_DMA_Init(&DMAtx);
