@@ -41,6 +41,10 @@
   // Max31865, TMC and LCD SD share a set of SPIs, Set TMC and SD to softwareSPI for Max31865
   #define SOFTWARE_SPI
   #define TMC_USE_SW_SPI
+
+  #if HAS_SPI_TFT
+    #error "Max31865 and SPI TFT of Octopus cannot be used now, because they reuse the same set of SPI"
+  #endif
 #endif
 
 #include "pins_BTT_OCTOPUS_V1_common.h"
