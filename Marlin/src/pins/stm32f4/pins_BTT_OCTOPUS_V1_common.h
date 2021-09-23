@@ -485,6 +485,9 @@
 #endif
 
 #if HAS_SPI_TFT
+  #if SD_CONNECTION_IS(LCD)
+    #error "There is no SD card on the SPI LCD, Please set 'SDCARD_CONNECTION' to 'ONBOARD'"
+  #endif
   #define TFT_CS_PIN                 EXP2_07_PIN
   #define TFT_A0_PIN                 EXP2_04_PIN
   #define TFT_SCK_PIN                EXP2_09_PIN
