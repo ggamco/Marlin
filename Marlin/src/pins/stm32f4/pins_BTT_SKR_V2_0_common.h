@@ -25,7 +25,7 @@
 
 // If you have the BigTreeTech driver expansion module, enable BTT_MOTOR_EXPANSION
 // https://github.com/bigtreetech/BTT-Expansion-module/tree/master/BTT%20EXP-MOT
-//#define BTT_MOTOR_EXPANSION
+#define BTT_MOTOR_EXPANSION
 
 #if BOTH(HAS_WIRED_LCD, BTT_MOTOR_EXPANSION)
   #if EITHER(CR10_STOCKDISPLAY, ENDER2_STOCKDISPLAY)
@@ -56,6 +56,12 @@
 // Servos
 //
 #define SERVO0_PIN                          PE5
+
+//
+// Strain gauge
+//
+#define STRAIN_GAUGE2_EN_PIN                PE5
+#define STRAIN_GAUGE_EN_PIN                 PE8
 
 //
 // Trinamic Stallguard pins
@@ -125,6 +131,8 @@
   #endif
 #endif
 
+#define X_MAX_PIN                           Z_STOP_PIN
+
 //
 // Z Probe (when not Z_MIN_PIN)
 //
@@ -136,7 +144,7 @@
 // Probe enable
 //
 #if ENABLED(PROBE_ENABLE_DISABLE)
-  #define PROBE_ENABLE_PIN            SERVO0_PIN
+  #define PROBE_ENABLE_PIN            STRAIN_GAUGE_EN_PIN
 #endif
 
 //
@@ -233,11 +241,11 @@
   #define FAN_PIN                           PB7   // Fan0
 #endif
 #ifndef FAN1_PIN
-  #define FAN1_PIN                          PB6   // Fan1
+  #define FAN1_PIN                          PB5   // PB6   // Fan1
 #endif
-#ifndef FAN2_PIN
-  #define FAN2_PIN                          PB5   // Fan2
-#endif
+// #ifndef FAN2_PIN
+//   #define FAN2_PIN                          PB5   // Fan2
+// #endif
 
 //
 // Software SPI pins for TMC2130 stepper drivers
