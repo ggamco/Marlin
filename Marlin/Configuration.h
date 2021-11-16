@@ -935,11 +935,18 @@
 #define DEFAULT_AXIS_STEPS_PER_UNIT   { 80, 80, 400, 92 }
 
 /**
+ * Steps X2 : X1 = 64 : 80 = 4 : 5
+ * Scale and base need to be integers for calculation in timer interrupt.
+ */
+#define X2_STEPS_SCALE 4
+#define X2_STEPS_BASE  5
+
+/**
  * Default Max Feed Rate (mm/s)
  * Override with M203
  *                                      X, Y, Z [, I [, J [, K]]], E0 [, E1[, E2...]]
  */
-#define DEFAULT_MAX_FEEDRATE          { 150, 150, 10, 65 }
+#define DEFAULT_MAX_FEEDRATE          { 120, 120, 10, 65 }
 
 //#define LIMITED_MAX_FR_EDITING        // Limit edit via M203 or LCD to DEFAULT_MAX_FEEDRATE * 2
 #if ENABLED(LIMITED_MAX_FR_EDITING)
@@ -1191,7 +1198,7 @@
 #define PROBING_MARGIN 12
 
 // X and Y axis travel speed (mm/min) between probes
-#define XY_PROBE_FEEDRATE (133*60)
+#define XY_PROBE_FEEDRATE (100*60)
 
 // Feedrate (mm/min) for the first approach when double-probing (MULTIPLE_PROBING == 2)
 #define Z_PROBE_FEEDRATE_FAST (2*60)
