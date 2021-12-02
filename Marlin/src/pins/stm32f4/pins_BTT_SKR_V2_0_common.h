@@ -241,6 +241,9 @@
   #define FAN2_PIN                          PB5   // Fan2
 #endif
 
+#define CONTROLLER_FAN_PIN                  PB5   //FAN1 motor CONTROLLER_FAN
+#define CONTROLLER_FAN_PIN2                 PB6   //FAN2 motor CONTROLLER_FAN
+
 //
 // Software SPI pins for TMC2130 stepper drivers
 //
